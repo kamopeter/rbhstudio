@@ -23,11 +23,12 @@ class ProbaController extends Controller
 
     public function decrypt(Request $request){
         $data = Proba::where('id',1)->get();
-        echo $data;
+        $array = json_decode($data, true);
+        echo $array[0]['name'];
         $name_in = $request->input('name');
-        $ses = session()->get('name');
-        $crypt = Crypt::decryptString($data);
-        if( $name_in === $data) {
+        //$ses = session()->get('name');
+        $crypt = Crypt::decryptString($array[0]['name']);
+        if( $name_in === $crypt) {
             return view('welcome');
         }
         else {

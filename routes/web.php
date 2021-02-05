@@ -15,14 +15,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 Route::get('proba', function(){
     return view('proba');
 });
 Route::post('proba/save',[ProbaController::class,'crypt'])->name('save');
 Route::post('proba/log',[ProbaController::class,'decrypt'])->name('log');
-
+Route::get('/debug-sentry', function () {
+    throw new Exception('My first Sentry error!');
+});
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
